@@ -1,8 +1,12 @@
 module StaticPage
   def self.remove_spree_mount_point(path)
-    regex = Regexp.new Rails.application.routes.url_helpers.spree_path
-    path.sub( regex, '').split('?')[0]
-  end
+    spree_path = Rails.application.routes.url_helpers.spree_path
+    if spree_path == '/' # Spree is mounted as root
+      path.sub!( '//', '/') # this fixes a Rails bug
+    else
+      path.sub!( Regexp.new(spree_path), '')
+    end
+    path.split('?')[0]  end
 end
 
 class Spree::StaticPage
