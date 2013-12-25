@@ -1,5 +1,5 @@
 class Spree::Admin::PagesController < Spree::Admin::ResourceController
-  update.after :expire_cache
+  # update.after :expire_cache
 
   def new
     @page = @object
@@ -9,8 +9,8 @@ class Spree::Admin::PagesController < Spree::Admin::ResourceController
     @page = @object
   end
 
-  private
-  def expire_cache
-    expire_fragment "spree_static_content" + @object.slug + "_spree_static_content"
-  end
+  # private
+  # def expire_cache
+  #   expire_fragment "spree_static_content" + @object.slug + "_spree_static_content"
+  # end
 end
